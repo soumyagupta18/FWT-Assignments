@@ -1,15 +1,18 @@
 package com.yash.mbs.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import com.yash.mbs.exception.FileContentEmptyException;
 import com.yash.mbs.exception.FileNameEmptyException;
 import com.yash.mbs.exception.FileNotPresentException;
 
-public class OperatorMenu {
+public class FileUtil {
 
 	public void displayOperatorMenu(String filePath) {
 		filePathIsNull(filePath);
@@ -18,7 +21,32 @@ public class OperatorMenu {
 
 	}
 
-	private void readFile(String filePath) {
+	public File createFile(String fileName) {
+		File file = new File("src/main/resources/" + fileName);
+		try {
+
+			if (!file.exists())
+				file.createNewFile();
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
+		}
+		return file;
+
+	}
+
+	public void writeFile(String JsonString, String filepath) throws IOException {
+		File file = new File(filepath);
+		if (file.exists()) {
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.getAbsolutePath(), true));
+			bufferedWriter.write(JsonString);
+			bufferedWriter.newLine();
+			bufferedWriter.close();
+			System.out.println("wrote in file");
+		}
+
+	}
+
+	public void readFile(String filePath) {
 		try {
 
 			FileReader fileReader = new FileReader(filePath);
@@ -32,7 +60,6 @@ public class OperatorMenu {
 
 			}
 			bufferedReader.close();
-			System.out.println(contents.toString());
 
 		} catch (FileNotFoundException fileNotFoundException) {
 			throw new FileNotPresentException("File not found !");
@@ -41,7 +68,7 @@ public class OperatorMenu {
 		}
 	}
 
-	private void fileContentIsEmpty(BufferedReader bufferedReader) throws IOException {
+	public void fileContentIsEmpty(BufferedReader bufferedReader) throws IOException {
 		String text = null;
 		if ((text = bufferedReader.readLine()) == null) {
 			throw new FileContentEmptyException("File Contents Are Empty");
@@ -49,13 +76,13 @@ public class OperatorMenu {
 		}
 	}
 
-	private void filePathIsEmpty(String filePath) {
+	public void filePathIsEmpty(String filePath) {
 		if (filePath == "") {
 			throw new FileNameEmptyException("File Name can't be empty.");
 		}
 	}
 
-	private void filePathIsNull(String filePath) {
+	public void filePathIsNull(String filePath) {
 		if (filePath == null) {
 			throw new FileNotPresentException("File cannot be null");
 		}

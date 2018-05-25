@@ -1,6 +1,6 @@
 package com.yash.mbs.service;
 
-import com.yash.mbs.domain.MyScreen;
+import com.yash.mbs.domain.Screen;
 import com.yash.mbs.exception.ScreenAlreadyExistExcepiton;
 
 public interface ScreenService {
@@ -12,7 +12,7 @@ public interface ScreenService {
 	 * @return positive integer in case of successsful insertion
 	 * @throws ScreenAlreadyExistExcepiton if screen name already exist
 	 */
-	int addScreen(MyScreen myScreen) ;
+	public boolean addScreen(Screen screen) ;
 
 	
 

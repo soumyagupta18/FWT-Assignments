@@ -6,9 +6,9 @@ import com.yash.mbs.exception.FileContentEmptyException;
 import com.yash.mbs.exception.FileNameEmptyException;
 import com.yash.mbs.exception.FileNotPresentException;
 
-public class OperatorMenuTest {
+public class FileUtilTest {
 
-	OperatorMenu operatorMenu = new OperatorMenu();
+	FileUtil operatorMenu = new FileUtil();
 
 	@Test(expected = FileNotPresentException.class)
 	public void should_ThrowFileNotPresentException_when_ExpectedFileNotFound() {

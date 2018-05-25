@@ -1,58 +1,45 @@
 package com.yash.mbs.domain;
 
-import java.util.ArrayList;
-
+/**
+ * This class will be of Screen Entity and its primary work is to transfer data
+ * among layers.
+ * 
+ * @author soumya.gupta
+ *
+ */
 public class Screen {
 
-	private int screenId;
+	private int id;
 	private String name;
-	private Movie movie;
-	private ArrayList<Row> rows;
+	private Movie myMovie;
 
-	public Screen() {
-	}
-
-	public Screen(int screenId, String name) {
-		super();
-		this.screenId = screenId;
+	public Screen(int id, String name) {
+		this.id = id;
 		this.name = name;
+
 	}
 
-	public int getScreenId() {
-		return screenId;
+	public Screen(int id, String name, Movie myMovie) {
+		this.id = id;
+		this.name = name;
+		this.myMovie = myMovie;
 	}
 
-	public void setScreenId(int screenId) {
-		this.screenId = screenId;
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Movie getMovie() {
-		return movie;
-	}
-
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
-
-	public ArrayList<Row> getRows() {
-		return rows;
-	}
-
-	public void setRows(ArrayList<Row> rows) {
-		this.rows = rows;
+	public Movie getMyMovie() {
+		return myMovie;
 	}
 
 	@Override
 	public String toString() {
-		return "Screen [screenId=" + screenId + ", name=" + name + ", movie=" + movie + ", rows=" + rows + "]";
+		return "MyScreen [id=" + id + ", name=" + name + ", myMovie=" + myMovie + "]";
 	}
 
 }
