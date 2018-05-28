@@ -6,11 +6,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.yash.mbs.domain.Screen;
 
 public class JsonUtil {
+	
+	private static String json;
+
 
 	public void writeJsonObjectToFile(String screensJson, String filepath) {
 		File file = new File(filepath);
+		System.out.println(file+"file in writeObjectToFile");
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(file);
@@ -27,6 +37,17 @@ public class JsonUtil {
 			}
 
 		}
+	}
+	public static List<Screen> ConvertjsonToObject(String data) {
+		Gson gson = new Gson();
+		Type type = new TypeToken<List<Screen>>() {
+		}.getType();
+		json = gson.toJson(data, type);
+		List<Screen> fromJson = gson.fromJson(json, type);
+		for (Screen screen : fromJson) {
+			System.out.println(screen);
+		}
+		return fromJson;
 	}
 
 	public String readJsonObjectFromFile(String filepath) {

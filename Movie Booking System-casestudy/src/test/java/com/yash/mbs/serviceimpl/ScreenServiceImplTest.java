@@ -43,7 +43,7 @@ public class ScreenServiceImplTest {
 	}
 
 	@Test
-	public void addScreen_ScreenObjectGiven_ShouldReturnOne() {
+	public void addScreen_ScreenObjectGiven_ShouldReturnTrue() {
 		Screen myScreen = new Screen(101, "Screen-2");
 		when(screenDAO.insert(myScreen)).thenReturn(true);
 		boolean rowAffected = screenService.addScreen(myScreen);

@@ -12,7 +12,16 @@ import com.yash.mbs.exception.FileContentEmptyException;
 import com.yash.mbs.exception.FileNameEmptyException;
 import com.yash.mbs.exception.FileNotPresentException;
 
+/**
+ * This Utility class performs all the functions that we need to run application
+ * using operations on file.
+ * 
+ * @author soumya.gupta
+ *
+ */
 public class FileUtil {
+	private File file;
+	
 
 	public void displayOperatorMenu(String filePath) {
 		filePathIsNull(filePath);
@@ -41,12 +50,11 @@ public class FileUtil {
 			bufferedWriter.write(JsonString);
 			bufferedWriter.newLine();
 			bufferedWriter.close();
-			System.out.println("wrote in file");
 		}
 
 	}
 
-	public void readFile(String filePath) {
+	public String readFile(String filePath) {
 		try {
 
 			FileReader fileReader = new FileReader(filePath);
@@ -60,12 +68,16 @@ public class FileUtil {
 
 			}
 			bufferedReader.close();
-
+			
+			System.out.println(contents.toString());
+			
 		} catch (FileNotFoundException fileNotFoundException) {
 			throw new FileNotPresentException("File not found !");
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
 		}
+		return "";
+		
 	}
 
 	public void fileContentIsEmpty(BufferedReader bufferedReader) throws IOException {
@@ -87,5 +99,30 @@ public class FileUtil {
 			throw new FileNotPresentException("File cannot be null");
 		}
 	}
+	public File getFile(String fileName) throws FileNotFoundException {
+		ClassLoader classLoader = getClass().getClassLoader();
+		try {
+			file = new File(classLoader.getResource(fileName).getFile());
+			return file;
+		} catch (Exception exception) {
+			throw new FileNotFoundException("File does not exist");
+		}
+	}
 
+	public String readFileReturnString(String fileName) throws FileNotFoundException {
+		
+		
+		file = getFile(fileName);
+		String contentOfFile;
+		BufferedReader bufferedReader;
+		try {
+			bufferedReader = new BufferedReader(new FileReader(file));
+			contentOfFile = bufferedReader.readLine();
+			fileContentIsEmpty(bufferedReader);
+			bufferedReader.close();
+		} catch (Exception exception) {
+			throw new FileContentEmptyException("File is Empty");
+		}
+		return contentOfFile;
+	}
 }

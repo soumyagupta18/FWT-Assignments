@@ -1,5 +1,6 @@
 package com.yash.mbs.serviceimpl;
 
+import java.io.FileNotFoundException;
 import java.sql.Time;
 
 import org.apache.log4j.Logger;
@@ -15,15 +16,17 @@ public class MovieServiceImpl implements MovieService {
 	private MovieDAO movieDAO;
 	private static final Logger logger = Logger.getLogger(MovieServiceImpl.class);
 
+	public MovieServiceImpl() {
+	}
 	public MovieServiceImpl(MovieDAO movieDAO) {
 		this.movieDAO = movieDAO;
 	}
 
-	public boolean addMovie(Movie movie, String screenName) {
+	public boolean addMovie(Movie movie, String screenName) throws FileNotFoundException {
 		logger.info("Entered into addMovie method-MovieServiceImpl");
 		checkNullMovieObject(movie);
 		checkEmptyMovieFields(movie, screenName);
-		logger.info("Exit from addMovie method-MovieServiceImpl");
+		logger.info("Exit from addMovie method-MovieServiceImpl ");
 		return movieDAO.insert(movie, screenName);
 
 	}

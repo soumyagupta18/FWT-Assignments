@@ -1,5 +1,7 @@
 package com.yash.mbs.dao;
 
+import java.io.FileNotFoundException;
+
 import com.yash.mbs.domain.Movie;
 
 public interface MovieDAO {
@@ -10,7 +12,8 @@ public interface MovieDAO {
 	 * @param movie
 	 * @param screenName
 	 * @return
+	 * @throws FileNotFoundException 
 	 */
-	public boolean insert(Movie movie, String screenName);
+	public boolean insert(Movie movie, String screenName) throws FileNotFoundException;
 
 }

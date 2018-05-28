@@ -1,6 +1,6 @@
 package com.yash.mbs.daoimpl;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Time;
 import java.util.Arrays;
@@ -18,10 +18,9 @@ public class ScreenDAOImplTest {
 	@Test
 	public void insertScreen_ScreenObjectGiven_ShouldReturnTrue() {
 
-		boolean isScreenAdded = screenDAO.insert(new Screen(102, "Screen-2", new Movie(1, "K3G", "Dharma Production",
-				Time.valueOf("03:00:00"), Arrays.asList("Sharukh", "Kajol"))));
+		boolean isScreenAdded = screenDAO.insert(new Screen(102, "Screen-2",
+				new Movie(1, "K3G", "Dharma Production", Time.valueOf("04:00:00"), Arrays.asList("Sharukh", "Kajol"))));
 		assertTrue(isScreenAdded);
-
 	}
 
 }

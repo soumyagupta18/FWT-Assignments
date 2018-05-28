@@ -17,7 +17,7 @@ public class ScreenDAOImpl implements ScreenDAO {
 	private static final Logger logger = Logger.getLogger(ScreenDAOImpl.class);
 	private List<Screen> screens = new ArrayList<Screen>();
 	private JsonUtil jsonUtil = new JsonUtil();
-	private String filepath = "src/main/resources/screenJson.json";
+	private String filepath = "src/main/resources/ScreenJson.json";
 
 	public ScreenDAOImpl() {
 		logger.info("ScreenDAOImpl constructor Initilaizing");
@@ -36,26 +36,11 @@ public class ScreenDAOImpl implements ScreenDAO {
 		
 	}
 
-	private List<Screen> convertJsonIntoString(String contentToDisplay) {
-		Gson gSon = new Gson();
-		Type listType = new TypeToken<List<String>>() {
-		}.getType();
-		List<Screen> screens = gSon.fromJson(contentToDisplay, listType);
-		return screens;
-	}
-
 	public boolean insert(Screen myScreen) {
 		
 		String screensJson = convertScreenIntoJson(myScreen);
 		jsonUtil.writeJsonObjectToFile(screensJson, filepath);
 		return true;
-	}
-
-	private String convertScreenIntoJson(Screen myScreen) {
-		Gson gSon = new Gson();
-		screens.add(myScreen);
-		String screensJson = gSon.toJson(screens);
-		return screensJson;
 	}
 
 	public List<Screen> getAllScreen() {
@@ -64,6 +49,20 @@ public class ScreenDAOImpl implements ScreenDAO {
 		for (Screen screen : screens) {
 			System.out.println(screen);
 		}
+		return screens;
+	}
+	private String convertScreenIntoJson(Screen myScreen) {
+		Gson gSon = new Gson();
+		screens.add(myScreen);
+		String screensJson = gSon.toJson(screens);
+		return screensJson;
+	}
+
+	private List<Screen> convertJsonIntoString(String contentToDisplay) {
+		Gson gSon = new Gson();
+		Type listType = new TypeToken<List<String>>() {
+		}.getType();
+		List<Screen> screens = gSon.fromJson(contentToDisplay, listType);
 		return screens;
 	}
 

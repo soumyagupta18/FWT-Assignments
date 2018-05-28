@@ -29,6 +29,7 @@ public class ScreenServiceImpl implements ScreenService {
 		checkScreenAlreadyExist(screen);
 		checkScreenCapacity();
 		screenDAO.insert(screen);
+		System.out.println("Screen Added Successfully!");
 		logger.info("Exiting into addScreen method-ScreenServiceImpl");
 		return true;
 	}

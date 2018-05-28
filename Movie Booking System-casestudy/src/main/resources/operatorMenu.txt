@@ -8,3 +8,5 @@
 6. Cancel booking
 7. Show availability
 8. Reports
+9. Exit
+Enter Your Choice

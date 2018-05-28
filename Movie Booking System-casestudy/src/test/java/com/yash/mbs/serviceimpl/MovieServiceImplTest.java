@@ -3,6 +3,7 @@ package com.yash.mbs.serviceimpl;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.io.FileNotFoundException;
 import java.sql.Time;
 import java.util.Arrays;
 
@@ -33,12 +34,12 @@ public class MovieServiceImplTest {
 	}
 
 	@Test(expected = ObjectNullPointerException.class)
-	public void addMovie_NullMovieObjectGiven_ThrowObjectNullPointerException() {
+	public void addMovie_NullMovieObjectGiven_ThrowObjectNullPointerException() throws FileNotFoundException {
 		movieService.addMovie(null, screenName);
 	}
 
 	@Test
-	public void addMovie_MovieObjectGiven_ShouldReturnTrue() {
+	public void addMovie_MovieObjectGiven_ShouldReturnTrue() throws FileNotFoundException {
 		Movie movie = new Movie(1, "K3G", "Dharma Productions", Time.valueOf("03:00:00"),
 				Arrays.asList("Rani", "Kajol", "Kareena", "Hritik", "Shahrukh"));
 		when(movieDAO.insert(movie, screenName)).thenReturn(true);
@@ -47,7 +48,7 @@ public class MovieServiceImplTest {
 	}
 
 	@Test(expected = EmptyFieldExcepiton.class)
-	public void addMovie_MovieObjectGivenWithAnyNullfields_ThrowsEmptyFieldExcepiton() {
+	public void addMovie_MovieObjectGivenWithAnyNullfields_ThrowsEmptyFieldExcepiton() throws FileNotFoundException {
 		Movie movie = new Movie(1, "", "Dharma Productions", Time.valueOf("03:00:00"),
 				Arrays.asList("Rani", "Kajol", "Kareena", "Hritik", "Shahrukh"));
 		when(movieDAO.insert(movie, screenName)).thenThrow(new EmptyFieldExcepiton("No null fields Accepted."));
@@ -56,7 +57,7 @@ public class MovieServiceImplTest {
 	}
 
 	@Test(expected = EmptyFieldExcepiton.class)
-	public void addMovie_NullScreenNameGiven_ThrowEmptyFieldException() {
+	public void addMovie_NullScreenNameGiven_ThrowEmptyFieldException() throws FileNotFoundException {
 		Movie movie = new Movie(1, "", "Dharma Productions", Time.valueOf("03:00:00"),
 				Arrays.asList("Rani", "Kajol", "Kareena", "Hritik", "Shahrukh"));
 		when(movieDAO.insert(movie, "")).thenThrow(new EmptyFieldExcepiton("Screen Name cannot eb null"));

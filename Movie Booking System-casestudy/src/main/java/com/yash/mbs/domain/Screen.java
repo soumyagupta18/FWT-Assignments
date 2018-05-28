@@ -11,7 +11,7 @@ public class Screen {
 
 	private int id;
 	private String name;
-	private Movie myMovie;
+	private Movie movie;
 
 	public Screen(int id, String name) {
 		this.id = id;
@@ -19,10 +19,10 @@ public class Screen {
 
 	}
 
-	public Screen(int id, String name, Movie myMovie) {
+	public Screen(int id, String name, Movie movie) {
 		this.id = id;
 		this.name = name;
-		this.myMovie = myMovie;
+		this.movie = movie;
 	}
 
 	public int getId() {
@@ -33,13 +33,16 @@ public class Screen {
 		return name;
 	}
 
-	public Movie getMyMovie() {
-		return myMovie;
+	public Movie getmovie() {
+		return movie;
+	}
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 
 	@Override
 	public String toString() {
-		return "MyScreen [id=" + id + ", name=" + name + ", myMovie=" + myMovie + "]";
+		return "MyScreen [id=" + id + ", name=" + name + ", movie=" + movie + "]";
 	}
 
 }
